@@ -31,4 +31,7 @@ namespace prob40 {
 namespace prob41 {
   int Start();
 }
+namespace prob42 {
+  int Start();
+}
 #endif
