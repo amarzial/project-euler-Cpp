@@ -1,5 +1,7 @@
 import glob
 import re
+import sys
+
 replace_string = '''    case({0}):
       std::cout << "Problem {0}:" << std::endl;
       start_t = std::chrono::system_clock::now();
@@ -8,16 +10,21 @@ replace_string = '''    case({0}):
       print_speed(end_t - start_t);
       if (not full_run) break;\n'''
 
-f = open("template.cpp", 'r')
-sources = glob.glob("./probs/prob*.cpp")
+try:
+    f = open(sys.argv[1], 'r')
+except:
+    print ("Invalid argument")
+    exit()
+
+sources = glob.glob("./prob/prob*.cpp")
 problems = []
 for prob in sources:
-    a = re.match("./probs/prob(\d+).cpp", prob)
+    a = re.match("./prob/prob(\d+).cpp", prob)
     problems.append(a.group(1))
 
 problems.sort()
 
-out = open("start.cpp", 'w')
+out = open("src/start.cpp", 'w')
 for line in f.readlines():
     if "$REPLACE$" in line:
         for prob in problems:
@@ -27,7 +34,7 @@ for line in f.readlines():
 f.close()
 out.close()
 
-header = open("problems.hpp", 'w')
+header = open("include/problems.hpp", 'w')
 header.write("#ifndef PROBLEM_HPP\n#define PROBLEM_HPP\n\n")
 
 for prob in problems:

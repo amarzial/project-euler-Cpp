@@ -1,32 +1,38 @@
 EXECUTABLE=euler
 CC=g++
-TEMPLATE=template.cpp
 MAIN=start.cpp
 OTHER_SRC=utils.cpp
-OBJECTS=$(addprefix obj/,$(MAIN:.cpp=.o) $(OTHER_SRC:.cpp=.o))
-PROBLEMS_SRC=$(wildcard probs/*.cpp)
-PROBLEMS_OBJ=$(addprefix obj/,$(notdir $(PROBLEMS_SRC:.cpp=.o)))
+SRCDIR=src/
+OBJDIR=obj/
+PROBDIR=prob/
+INCDIR=include/
+SOURCES=$(addprefix $(SRCDIR),$(MAIN) $(OTHER_SRC))
+OBJECTS=$(addprefix $(OBJDIR),$(MAIN:.cpp=.o) $(OTHER_SRC:.cpp=.o))
+PROBLEMS_SRC=$(wildcard $(PROBDIR)/*.cpp)
+PROBLEMS_OBJ=$(addprefix $(OBJDIR),$(notdir $(PROBLEMS_SRC:.cpp=.o)))
+TEMPLATE=$(SRCDIR)template.cpp
+UPDATER_SCRIPT=updater.py
 CFLAGS=--std=c++11 -Wall
 BFLAGS=--std=c++11
 
 .PHONY: all
 
-all: obj $(EXECUTABLE)
+all: $(OBJDIR) $(EXECUTABLE)
 
 $(EXECUTABLE): $(OBJECTS) $(PROBLEMS_OBJ)
 	$(CC) -g -o $(EXECUTABLE) $(OBJECTS) $(PROBLEMS_OBJ)
 
-obj/%.o: %.cpp
-	$(CC) -c $(CFLAGS) $< -g -o $@ -I.
+obj/%.o: $(SRCDIR)%.cpp
+	$(CC) -c $(CFLAGS) $< -g -o $@ -I$(INCDIR)
 
-obj/%.o: probs/%.cpp
-	$(CC) -c $(CFLAGS) $< -g -o $@ -I.
+obj/%.o: $(PROBDIR)/%.cpp
+	$(CC) -c $(CFLAGS) $< -g -o $@ -I$(INCDIR)
 
-obj:
-	mkdir -p obj
+$(OBJDIR):
+	mkdir -p $(OBJDIR)
 
-$(MAIN): $(PROBLEMS_SRC) $(TEMPLATE)
-	python updater.py
+$(addprefix $(SRCDIR),$(MAIN)): $(PROBLEMS_SRC) $(TEMPLATE)
+	python $(UPDATER_SCRIPT) $(TEMPLATE)
 
 clean:
 	rm -rf $(OBJECTS) $(PROBLEMS_OBJ)
