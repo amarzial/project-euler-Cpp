@@ -9,6 +9,7 @@ int digit_count(int n);
 
 bool is_prime(int n);
 
+bool is_prime_miller(int number);
 
 bool is_pandigital(int n, bool include_zero = false);
 }
