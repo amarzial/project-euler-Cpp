@@ -6,7 +6,7 @@
 namespace prob34 {
 bool isCurious(int num) {
   int tot = 0, tmp = num;
-  for (int i = 0; i < utils::digitCount(num); i++) {
+  for (int i = 0; i < utils::digit_count(num); i++) {
     tot += utils::factorial(tmp % 10);
     tmp /= 10;
   }

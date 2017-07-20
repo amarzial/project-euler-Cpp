@@ -26,9 +26,9 @@ int makemult(int n) {
     int t = n * i;
     int digs;
     int digs2;
-    digs = utils::digitCount(out);
+    digs = utils::digit_count(out);
     if (digs == 9) return check_pandigit(out) ? out : 0;
-    if (((digs) + (digs2 = utils::digitCount(t))) > 9) return 0;
+    if (((digs) + (digs2 = utils::digit_count(t))) > 9) return 0;
     out = out * std::pow(10, digs2) + t;
   }
   return 0;

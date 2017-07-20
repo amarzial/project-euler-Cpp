@@ -11,12 +11,12 @@ std::set<int> nbrs;
 
 bool is_truncatable(int n) {
   if (n == 0) return true;
-  if (utils::isPrime(n)) return (is_truncatable(n / 10));
+  if (utils::is_prime(n)) return (is_truncatable(n / 10));
   return (false);
 }
 
 void get_nbrs(int n, int digits) {
-  if (digits > 7 or not utils::isPrime(n)) return;
+  if (digits > 7 or not utils::is_prime(n)) return;
   if (digits > 1 and is_truncatable(n)) {
     nbrs.insert(n);
   }

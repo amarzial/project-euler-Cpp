@@ -5,11 +5,12 @@
 namespace utils {
 int factorial(int n);
 
-int digitCount(int n);
+int digit_count(int n);
 
-bool isPrime(int n);
+bool is_prime(int n);
 
-bool isPandigital(int n, bool include_zero = false);
+
+bool is_pandigital(int n, bool include_zero = false);
 }
 
 #endif

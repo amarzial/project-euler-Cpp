@@ -6,7 +6,7 @@
 namespace utils {
 int factorial(int n) { return (n == 1 || n == 0) ? 1 : factorial(n - 1) * n; }
 
-int digitCount(int n) {
+int digit_count(int n) {
   int pow = 10;
   int count = 1;
   while (pow < n) {
@@ -18,18 +18,18 @@ int digitCount(int n) {
   return count;
 }
 
-bool isPrime(int n) {
+bool is_prime(int n) {
   int square_root = sqrt(n);  // use math.h
   for (int i = 2; i <= square_root; i++) {
     if (n % i == 0) {
       return false;
     }
   }
-  if (n == 1) return false;
+  if (n <= 1) return false;
   return true;
 }
 
-bool isPandigital(int n, bool include_zero) {
+bool is_pandigital(int n, bool include_zero) {
   std::array<int, 10> vals;
   vals.fill(0);
   bool stopped = false;
