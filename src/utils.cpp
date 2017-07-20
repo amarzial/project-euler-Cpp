@@ -29,7 +29,7 @@ bool isPrime(int n) {
   return true;
 }
 
-bool isPandigital(int n) {
+bool isPandigital(int n, bool include_zero) {
   std::array<int, 10> vals;
   vals.fill(0);
   bool stopped = false;
@@ -37,7 +37,7 @@ bool isPandigital(int n) {
     vals[n % 10] = 1;
     n /= 10;
   }
-  for (int i = 1; i < 10; i++) {
+  for (int i = (include_zero ? 0 : 1); i < 10; i++) {
     if (vals[i] == 1 and stopped)
       return false;
     else if (vals[i] == 0)

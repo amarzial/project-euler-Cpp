@@ -9,7 +9,7 @@ int digitCount(int n);
 
 bool isPrime(int n);
 
-bool isPandigital(int n);
+bool isPandigital(int n, bool include_zero = false);
 }
 
 #endif
