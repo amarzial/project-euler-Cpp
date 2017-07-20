@@ -25,7 +25,7 @@ $(EXECUTABLE): $(OBJECTS) $(PROBLEMS_OBJ)
 obj/%.o: $(SRCDIR)%.cpp
 	$(CC) -c $(CFLAGS) $< -g -o $@ -I$(INCDIR)
 
-obj/%.o: $(PROBDIR)/%.cpp
+obj/%.o: $(PROBDIR)%.cpp
 	$(CC) -c $(CFLAGS) $< -g -o $@ -I$(INCDIR)
 
 $(OBJDIR):
