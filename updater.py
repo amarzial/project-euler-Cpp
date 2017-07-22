@@ -2,14 +2,6 @@ import glob
 import re
 import sys
 
-replace_string = '''    case({0}):
-      std::cout << "Problem {0}:" << std::endl;
-      start_t = std::chrono::system_clock::now();
-      prob{0}::Start();
-      end_t = std::chrono::system_clock::now();
-      print_speed(end_t - start_t);
-      if (not full_run) break;\n'''
-
 try:
     f = open(sys.argv[1], 'r')
 except:
@@ -25,10 +17,18 @@ for prob in sources:
 problems.sort()
 
 out = open("src/start.cpp", 'w')
+replacing = False
+replace_string = ""
 for line in f.readlines():
-    if "$REPLACE$" in line:
-        for prob in problems:
-            out.write(replace_string.format(prob))
+    if "$TEMPLATE$" in line:
+        replacing = True
+    elif replacing:
+        if "$END_TEMPLATE$" in line:
+            replacing = False
+            for prob in problems:
+                out.write(replace_string.format(prob))
+        else:
+            replace_string += line;
     else:
         out.write(line);
 f.close()
