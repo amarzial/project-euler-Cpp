@@ -55,4 +55,7 @@ namespace prob48 {
 namespace prob49 {
   int Start();
 }
+namespace prob50 {
+  int Start();
+}
 #endif
