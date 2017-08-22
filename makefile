@@ -14,19 +14,20 @@ TEMPLATE=$(SRCDIR)template.cpp
 UPDATER_SCRIPT=updater.py
 CFLAGS=--std=c++11 -Wall
 BFLAGS=--std=c++11
+OFLAGS=-g
 
 .PHONY: all
 
 all: $(OBJDIR) $(EXECUTABLE)
 
 $(EXECUTABLE): $(OBJECTS) $(PROBLEMS_OBJ)
-	$(CC) -g -o $(EXECUTABLE) $(OBJECTS) $(PROBLEMS_OBJ)
+	$(CC) $(OFLAGS) -o $(EXECUTABLE) $(OBJECTS) $(PROBLEMS_OBJ)
 
 obj/%.o: $(SRCDIR)%.cpp
-	$(CC) -c $(CFLAGS) $< -g -o $@ -I$(INCDIR)
+	$(CC) -c $(CFLAGS) $< $(OFLAGS) -o $@ -I$(INCDIR)
 
 obj/%.o: $(PROBDIR)%.cpp
-	$(CC) -c $(CFLAGS) $< -g -o $@ -I$(INCDIR)
+	$(CC) -c $(CFLAGS) $< $(OFLAGS) -o $@ -I$(INCDIR)
 
 $(OBJDIR):
 	mkdir -p $(OBJDIR)
